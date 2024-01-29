@@ -1,0 +1,21 @@
+name: CI API testing RestAssured
+
+on:
+  pull_request:
+    branches:
+      - develop
+    paths:
+      - '**/*'  # Este padrão irá acionar o workflow para qualquer alteração
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Docker container
+        uses: docker://fjulio2023/api-restassured-test:lastest
+        with:
+          options: -p 8081:8081  
